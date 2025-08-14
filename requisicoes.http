@@ -1,0 +1,13 @@
+POST http://localhost:3333/courses
+Content-Type: application/json
+
+{
+  "title": "Curso de Logica de programação 2"
+}
+###
+
+GET http://localhost:3333/courses
+
+###
+
+GET http://localhost:3333/courses/7f6d200d-4c9a-4718-945d-4c9bc409dd00
