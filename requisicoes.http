@@ -2,7 +2,7 @@ POST http://localhost:3333/courses
 Content-Type: application/json
 
 {
-  "title": "Curso de Logica de programação 2"
+  "title": "React Course"
 }
 ###
 
@@ -10,4 +10,4 @@ GET http://localhost:3333/courses
 
 ###
 
-GET http://localhost:3333/courses/7f6d200d-4c9a-4718-945d-4c9bc409dd00
+GET http://localhost:3333/courses/ba6da35f-4492-4a95-9b24-e472f755d210
