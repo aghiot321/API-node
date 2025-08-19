@@ -1,5 +1,10 @@
 import fastify from 'fastify'
-import crypto from 'node:crypto'
+import { fastifySwagger } from '@fastify/swagger'
+import { validatorCompiler, serializerCompiler, type ZodTypeProvider, jsonSchemaTransform } from 'fastify-type-provider-zod'
+import { getCoursesByIdRoute } from './src/routes/get-courses-by-id.ts'
+import { createCoursesRoute } from './src/routes/create-course.ts'
+import { getCoursesRoute } from './src/routes/get-courses.ts'
+import scalarAPIReferemce from '@scalar/fastify-api-reference'
 
 const server = fastify({
   logger: {
@@ -11,51 +16,31 @@ const server = fastify({
       }
     }
   },
+}).withTypeProvider<ZodTypeProvider>()
+
+server.register(fastifySwagger,{
+  openapi: {
+    info: {
+      title: 'Primeira API',
+      description: 'API',
+      version: '1.0.0',
+    }
+  },
+  transform: jsonSchemaTransform,
 })
 
-
-const courses = [
-    {id: 1, name: 'Curso de Node.js'},
-    {id: 2, name: 'Curso de C'},
-    {id: 3, name: 'Curso de React'}
-]
-
-server.get('/courses', () => {
-  return {courses}
+server.register(scalarAPIReferemce, {
+  routePrefix: '/docs',
 })
 
-server.get('/courses/:id', (request, reply) => {
-  type Params = { id: string }
-  
-  const params = request.params as Params
-  const courseId = params.id
+server.setSerializerCompiler(serializerCompiler)
+server.setValidatorCompiler(validatorCompiler)
 
-  const course = courses.find(course => course.id === courseId)
+server.register(getCoursesByIdRoute)
+server.register(getCoursesRoute)
+server.register(createCoursesRoute)
 
-  if (course) {
-    return {course}
-  }
 
-  return reply.status(404).send()
-})
-
-server.post('/courses', (request, reply) =>{
-  type Body = { title: string }
-
-   const courseID = crypto.randomUUID()
-
-  const body = request.body as Body
-  
-  const courseTitle = body.title
-
-  if (!courseTitle) {
-    return reply.status(400).send({error: 'Title is required'})
-  }
-
-  courses.push({id: courseID, title: courseTitle})
-  
-  return reply.status(201).send({courseID})
-})
 
 server.listen({port: 3333}).then(() => {
   console.log('HTTP server running')
