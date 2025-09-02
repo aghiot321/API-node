@@ -2,12 +2,13 @@ POST http://localhost:3333/courses
 Content-Type: application/json
 
 {
-  "title": "React Course"
+  "title": "Curso de Cobol"
 }
 ###
 
-GET http://localhost:3333/courses
+GET http://localhost:3333/courses?orderBy=title
+
 
 ###
 
-GET http://localhost:3333/courses/ba6da35f-4492-4a95-9b24-e472f755d210
+GET http://localhost:3333/courses/ba6da35f-4492-4a95-9b24-e472f755d

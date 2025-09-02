@@ -1,0 +1,1 @@
+CREATE DATABASE primeira_api_test;

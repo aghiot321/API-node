@@ -70,38 +70,6 @@ Este projeto é uma API simples desenvolvida em Node.js utilizando Fastify, Driz
 - O projeto utiliza validação de dados e impede cadastro de cursos com nomes duplicados.
 - Para customizar as rotas ou adicionar novas funcionalidades, edite os arquivos em `src/routes`.
 
-## Diagrama do Fluxo da Aplicação
-
-```mermaid
-flowchart TD
-    A([Usuário])
-    B([API Fastify])
-    C{Validação Zod}
-    D{Curso já existe?}
-    E([Drizzle ORM])
-    F([Banco PostgreSQL])
-    G([201 - Curso criado])
-    H([400 - Erro de validação])
-    I([400 - Curso já existe])
-    J([200 - Lista de cursos])
-
-    %% Fluxo de criação
-    A -- POST /courses --> B
-    B --> C
-    C -- Inválido --> H
-    C -- Válido --> D
-    D -- Sim --> I
-    D -- Não --> E
-    E --> F
-    F --> G
-
-    %% Fluxo de listagem
-    A -- GET /courses --> B
-    B --> E
-    E --> F
-    F --> J
-```
-
 ---
 
 Feito com ❤️ para estudos!
