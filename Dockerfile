@@ -4,7 +4,7 @@ WORKDIR /app
 
 COPY . ./
 
-RUN npm ci 
+RUN npm ci --include=dev
 
 EXPOSE 3333
 
