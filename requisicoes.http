@@ -1,5 +1,6 @@
 POST http://localhost:3333/courses
 Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2ZWRkYjExZi02NjgwLTQxNTYtODc4Ni1iMGYyODExYzVmNzQiLCJyb2xlIjoibWFuYWdlciIsImlhdCI6MTc1NzUxMjQyNH0.hjDHn3IPbU-bx8ZS5Ynmr65Ol-L_E3J0U-e2ChPe3JM
 
 {
   "title": "Curso de Cobol"
@@ -11,4 +12,14 @@ GET http://localhost:3333/courses?orderBy=title
 
 ###
 
-GET http://localhost:3333/courses/ba6da35f-4492-4a95-9b24-e472f755d
+GET http://localhost:3333/courses/1bf3aa7e-b548-47bf-952c-5e0d6d8654e5
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2ZWRkYjExZi02NjgwLTQxNTYtODc4Ni1iMGYyODExYzVmNzQiLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc1NzUwOTI3N30.njdkPWvnoKdD42RPwPdwmPf8HAjtfzQuNlzE5sEixEE
+###
+
+POST http://localhost:3333/sessions
+Content-Type: application/json
+
+{
+  "email": "Marcela66@bol.com.br",
+  "password": "123456"
+}

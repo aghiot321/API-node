@@ -4,24 +4,27 @@ import { server } from '../app.ts'
 import { faker } from '@faker-js/faker';
 import { makeCourse } from '../tersts/factories/make-course.ts';
 import { randomUUID } from 'crypto';
-import { makeUser } from '../tersts/factories/make-user.ts';
+import { makeAuthenticatedUser, makeUser } from '../tersts/factories/make-user.ts';
 import { makeEnrollment } from '../tersts/factories/make-enrollments.ts';
 
 test('get course', async () => {
   await server.ready()
   
   const titleId = randomUUID()
+
+    const { token } = await makeAuthenticatedUser('manager')
   
     const course = await makeCourse(titleId)
   
     const user = await makeUser()
   
-    const enrollment = await makeEnrollment(course.id, user.id)
+    const enrollment = await makeEnrollment(course.id, user.user.id)
 
 
   
   const response = await request(server.server)
-  .get(`/courses?search=${titleId}`)
+    .get(`/courses?search=${titleId}`)
+    .set('Authorization', token)
 
   console.log(response.body)
 
